@@ -1,6 +1,11 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const Category = new Schema({
+    main: String,
+    sub: String
+});
+
 const ProductSchema = new Schema({
     title: String,
     price: Number,
@@ -8,11 +13,6 @@ const ProductSchema = new Schema({
     description: Array,
     photo: Array,
     category: [Category]
-});
-
-const Category = new Schema({
-    main: String,
-    sub: String
 });
 
 module.exports = mongoose.model("Product", ProductSchema);
