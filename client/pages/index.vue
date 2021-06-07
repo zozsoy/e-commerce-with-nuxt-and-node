@@ -1,9 +1,10 @@
 <template>
   <div class="mainContainer">
     <TheSlider />
-    <div class="productLists">
-      <div v-for="i in 12" :key="i" class="productArea">
-        Product
+    <div class="centerArea">
+      <CategoriesAccordionMenu class="accordionMenu" />
+      <div class="productLists">
+        <div v-for="i in 12" :key="i" class="productArea">Product</div>
       </div>
     </div>
   </div>
@@ -11,10 +12,12 @@
 
 <script>
 import TheSlider from "../components/TheSlider";
+import CategoriesAccordionMenu from "../components/CategoriesAccordionMenu";
 
 export default {
   components: {
     TheSlider,
+    CategoriesAccordionMenu,
   }
 }
 </script>
@@ -25,6 +28,17 @@ export default {
   flex-direction: column;
   width: 100%;
   align-items: center;
+}
+.centerArea {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+}
+.accordionMenu {
+  width: 20%;
+  margin-left: 20px;
+  padding: 10px;
+  background-color: #f5f5f5;
 }
 .productLists {
   display: flex;
