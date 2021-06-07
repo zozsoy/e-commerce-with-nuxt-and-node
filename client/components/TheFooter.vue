@@ -4,8 +4,8 @@
         <div class="infoArea">
             <div class="rowOne">
                 <span class="brandHeader">Shop</span>
-                <p class="infoText">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima nobis molestiae quisquam labore deleniti perferendis rem. Obcaecati reiciendis consequatur eius quas nemo animi officiis accusantium deserunt? Cum temporibus minima debitis!</p>
-                <span class="phoneText">Phone : +90 000 000 0000</span>
+                <p class="infoText">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima nobis molestiae quisquam labore deleniti perferendis rem.</p>
+                <span class="phoneText">Phone : +90 000 000 0000</span> <br>
                 <span>help@shop.com</span><br>
                 <img class="imgInstagram" src="https://www.transparentpng.com/thumb/logo-instagram/JFyofc-logo-instagram-background-png.png" alt="logo Instagram background png @transparentpng.com">
                 <img class="imgInstagram" src="https://www.transparentpng.com/thumb/logo-instagram/JFyofc-logo-instagram-background-png.png" alt="logo Instagram background png @transparentpng.com">
@@ -50,7 +50,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: fixed;
+    width: 100%;
     left: 0;
     bottom: 0;
     background: #333C35;
