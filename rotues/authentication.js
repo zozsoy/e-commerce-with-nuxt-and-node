@@ -36,6 +36,35 @@ router.post("/authentication/singup", async (req, res) => {
             });
         }
     }
+}); 
+
+//sign In
+router.post("/authentication/singin", async (req, res) => {
+    try {
+        let anyUser = await User.findOne({email: req.body.email});
+        if (!anyUser) {
+            res.status(403).json({
+                success: false,
+                message: "user not found ..."
+            });
+        } else {
+            if (anyUser.comparePassword(req.body.password)) {
+                let token = jsonwebtoken.sign(anyUser.toJSON(), proccess.env.SECRET_KEY, {
+                    expiresIn: 31536000 // 1 yıl geçerli
+                }); // token oluşturur
+                res.json({
+                    success: true,
+                    token: token,
+                    message: "user is signin succesfully ..."
+                });
+            }
+        }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
 });
 
 module.exports = router;
