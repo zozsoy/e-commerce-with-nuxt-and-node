@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs"); 
 
 const UserSchema = new Schema({
     name: String,
@@ -24,21 +24,18 @@ UserSchema.pre('save', function(next){
             if (err) {
                 return next(err);
             }
-        });
-        bcrypt.hash(user.password, salt, null, function(err, hash) {
-            if (err) {
-                return next(err);
-            }
-            user.password = hash;
-            next();
+            bcrypt.hash(user.password, salt, function(err, hash) {
+                if (err) {
+                    return next(err);
+                }
+                user.password = hash;
+                next();
+            });
         });
     } else {
         return next()
     }
 }); // kayıt fonksiyonum
-UserSchema.methods.comparePassword = function(password, next) {
-    let user = this;
-    return bcrypt.compareSync(password, user.password);
-}// paraloları karşılaştırma
+
 
 module.exports = mongoose.model("User", UserSchema);

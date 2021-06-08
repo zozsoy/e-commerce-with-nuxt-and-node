@@ -11,11 +11,17 @@
         </b-nav-form>
 
         <!-- Right aligned nav items -->
-        <b-navbar-nav class="ml-auto">
-            <b-nav-item @click="$bvModal.show('bv-modal-example')">Login</b-nav-item>
+        <b-navbar-nav class="ml-auto" v-if="!this.$store.state.email">
+            <b-nav-item @click="$bvModal.show('bv-modal-login')" >Login</b-nav-item>
         </b-navbar-nav>
+
+        <b-dropdown :text="this.$store.state.email" variant="outline-dark" size="sm" class="m-2 ml-auto" right v-else>
+            <b-dropdown-item href="#">Profile</b-dropdown-item>
+            <b-dropdown-item @click="userLogout">Logout</b-dropdown-item>
+        </b-dropdown>
+
         <div>
-            <b-modal id="bv-modal-example" hide-footer>
+            <b-modal id="bv-modal-login" hide-footer>
                 <template #modal-title>
                 Login
                 </template>
@@ -39,7 +45,7 @@
                                     >
                                     <b-form-input id="input-2" v-model="password" type="password" trim></b-form-input>
                                     </b-form-group>
-                                    <b-button variant="outline-primary" block>Sign In</b-button>
+                                    <b-button variant="outline-primary" @click="userSignIn" block>Sign In</b-button>
                                 </div>
                             </b-tab>
                             <b-tab title="Sign Up">
@@ -49,7 +55,7 @@
                                     label="Enter your name"
                                     label-for="input-1"
                                     >
-                                    <b-form-input id="input-1" v-model="email" type="text" trim></b-form-input>
+                                    <b-form-input id="input-1" v-model="name" type="text" trim></b-form-input>
                                     </b-form-group>
 
                                     <b-form-group
@@ -73,17 +79,17 @@
                                     label="Enter your address"
                                     label-for="input-4"
                                     >
-                                    <b-form-input id="input-4" v-model="email" type="text" trim></b-form-input>
+                                    <b-form-textarea id="input-4" v-model="address" type="text" trim></b-form-textarea>
                                     </b-form-group>
 
                                     <b-form-group
                                     id="fieldset-5"
-                                    label="Enter your phone"
+                                    label="Enter your phone number"
                                     label-for="input-5"
                                     >
-                                    <b-form-input id="input-5" v-model="email" type="text" trim></b-form-input> 
+                                    <b-form-input id="input-5" v-model="phone" type="text" trim></b-form-input> 
                                     </b-form-group>
-                                    <b-button variant="outline-primary" block>Sign Up</b-button>
+                                    <b-button variant="outline-primary" block @click="userSignUp">Sign Up</b-button>
                                 </div>
                             </b-tab>                        
                         </b-tabs>
@@ -97,7 +103,66 @@
 </template>
 
 <script>
+import Cookie from "js-cookie"
 
+export default {
+    data() {
+        return {
+            name: null,
+            email: null,
+            password: null,
+            phone: null,
+            address: null
+        }
+    },
+    methods: {
+        async userSignUp() {
+            try {
+                let userData= {
+                    name: this.name,
+                    email: this.email,
+                    password: this.password,
+                    phone: this.phone,
+                    address: this.address
+                };
+                let result = await this.$axios.$post("http://localhost:8080/api/authentication/signup", userData);
+                console.log(result);
+
+                if (result.success) {
+                    Cookie.set("access_token", result.token);
+                    this.$store.commit("setUser", {
+                        name: this.name, 
+                        email: this.email
+                    });
+                    this.$bvmodal.hide('bv-modal-login');
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async userLogout() {
+            Cookie.remove("access_token");
+            this.$store.commit("removeUser");
+        },
+        async userSignIn() {
+            try {
+                 let userData= {
+                    email: this.email,
+                    password: this.password,
+                };
+                let result = await this.$axios.$post("http://localhost:8080/api/authentication/signin", userData);
+                console.log(result);
+                Cookie.set("access_token", result.token);
+                this.$store.commit("setUser", {
+                    name: result.user.name, 
+                    email: result.user.email
+                });
+            } catch (error) {
+                
+            }
+        }
+    }
+};
 </script>
 
 <style scoped>
