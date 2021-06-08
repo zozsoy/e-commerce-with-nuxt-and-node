@@ -10,38 +10,38 @@
     >
       <b-form-group
         label="Title:"
-        label-for="nested-street"
+        label-for="title"
         label-cols-sm="3"
         label-align-sm="right"
       >
-        <b-form-input v-model="title" id="nested-street"></b-form-input>
+        <b-form-input v-model="title" id="title"></b-form-input>
       </b-form-group>
 
       <b-form-group
         label="Price:"
-        label-for="nested-city"
+        label-for="price"
         label-cols-sm="3"
         label-align-sm="right"
       >
-        <b-form-input v-model="price" id="nested-city"></b-form-input>
+        <b-form-input v-model="price" id="price"></b-form-input>
       </b-form-group>
 
       <b-form-group
         label="Stock Number:"
-        label-for="nested-state"
+        label-for="stock"
         label-cols-sm="3"
         label-align-sm="right"
       >
-        <b-form-input v-model="stockNumber" id="nested-state"></b-form-input>
+        <b-form-input v-model="stockNumber" id="stock"></b-form-input>
       </b-form-group>
 
       <b-form-group
         label="Description:"
-        label-for="nested-country"
+        label-for="description"
         label-cols-sm="3"
         label-align-sm="right"
       >
-        <b-form-tags input-id="tags-basic" v-model="description" placeholder="Add Description"></b-form-tags>
+        <b-form-tags input-id="description" v-model="description" placeholder="Add Description"></b-form-tags>
       </b-form-group>
 
       <b-form-group
@@ -49,7 +49,7 @@
         label-cols-sm="3"
         label-align-sm="right"
       >
-        <b-form-tags input-id="tags-basic" v-model="photo" placeholder="Add Photo Link"></b-form-tags>
+        <b-form-tags input-id="photo" v-model="photo" placeholder="Add Photo Link"></b-form-tags>
       </b-form-group>
 
       <b-form-group
