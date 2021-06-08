@@ -28,7 +28,7 @@ router.post("/product", async (req, res) => {
 
 router.get("/product/:id", async (req, res) => {
     try {
-        let product = await Product.findOne({_id:req.params.id}).exec(); // findone: bir tane getirir
+        let product = await Product.findOne({_id:req.params.id}); // findOne: bir tane getirir
 
         res.status(200).json({
             success: true,
@@ -41,5 +41,32 @@ router.get("/product/:id", async (req, res) => {
         });
     }
  });
+
+ router.put("/product/:id", async (req, res) => {
+    try {
+        let product = await Product.findOneAndUpdate({_id:req.params.id}, {
+            $set: {
+                title : req.body.title,
+                price : req.body.price,
+                stockNumber : req.body.stockNumber,
+                description : req.body.description,
+                photo : req.body.photo,
+                mainCategory  : req.body.mainCategory,
+                subCategory  : req.body.subCategory
+            }
+        }, {upsert: true});
+
+        res.status(200).json({
+            success: true,
+            updatedProduct: product
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+ });
+
 
 module.exports = router;
