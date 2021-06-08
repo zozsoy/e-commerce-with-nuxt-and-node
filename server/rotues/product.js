@@ -9,12 +9,14 @@ router.post("/product", async (req, res) => {
         product.stockNumber = req.body.stockNumber;
         product.description = req.body.description;
         product.photo = req.body.photo;
-        product.category  = req.body.category;
+        product.mainCategory  = req.body.mainCategory;
+        product.subCategory  = req.body.subCategory;
 
         await product.save();
-        res.json({
+        res.status(200).json({
             success: true,
-            message: "product is saved succesfully ..."
+            message: "product is saved succesfully ...",
+            product: product
         });
     } catch (error) {
         res.status(500).json({
@@ -28,7 +30,7 @@ router.get("/product/:id", async (req, res) => {
     try {
         let product = await Product.findOne({_id:req.params.id}).exec(); // findone: bir tane getirir
 
-        res.json({
+        res.status(200).json({
             success: true,
             product: product
         });
