@@ -1,18 +1,18 @@
 <template>
   <div>
-    <UnregisteredUserNavbar />
+    <TheNavbar />
     <Nuxt />
     <TheFooter />
   </div>
 </template>
 
 <script>
-import UnregisteredUserNavbar from "../components/UnregisteredUserNavbar";
+import TheNavbar from "../components/TheNavbar";
 import TheFooter from "../components/TheFooter";
 
 export default {
   components: {
-    UnregisteredUserNavbar,
+    TheNavbar,
     TheFooter,
   }
 }
