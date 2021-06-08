@@ -68,5 +68,20 @@ router.get("/product/:id", async (req, res) => {
     }
  });
 
+ router.delete("/product/:id", async (req, res) => {
+    try {
+        let product = await Product.findOneAndDelete({_id:req.params.id});
+
+        res.status(200).json({
+            success: true,
+            product: product
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+ });
 
 module.exports = router;
