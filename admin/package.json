@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "admin",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -9,13 +9,12 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.13.6",
+    "@nuxt/content": "^1.14.0",
+    "@nuxtjs/axios": "^5.13.1",
+    "@nuxtjs/pwa": "^3.3.5",
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
-    "cookieparser": "^0.1.0",
     "core-js": "^3.9.1",
-    "js-cookie": "^2.2.1",
-    "jwt-decode": "^3.1.2",
     "nuxt": "^2.15.3"
   },
   "devDependencies": {}

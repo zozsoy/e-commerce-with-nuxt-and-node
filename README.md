@@ -1,1 +1,1 @@
-# e-commercewith-nuxt
+# e-commerce-with-nuxt
